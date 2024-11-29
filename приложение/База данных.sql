@@ -1,0 +1,166 @@
+CREATE DATABASE School;
+
+USE School;
+
+CREATE TABLE Roles
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    RoleTitle VARCHAR(255) COLLATE Cyrillic_General_CI_AS UNIQUE NOT NULL
+);
+
+CREATE TABLE Accounts
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Email VARCHAR(255) UNIQUE NOT NULL,
+    Login VARCHAR(255) NOT NULL,
+    Password VARBINARY(MAX) NOT NULL,
+    RoleID INT REFERENCES Roles(ID) NOT NULL
+);
+
+CREATE TABLE Classes
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    ClassNumber TINYINT NOT NULL CHECK (ClassNumber BETWEEN 1 AND 11),
+    ClassLetter VARCHAR(1) NOT NULL,
+	CONSTRAINT UQ_ClassNumber_Letter UNIQUE(ClassNumber, ClassLetter),
+);
+
+CREATE TABLE Students
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    AccountID INT REFERENCES Accounts(ID) ON DELETE CASCADE ON UPDATE CASCADE UNIQUE NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    SecondName VARCHAR(255) NOT NULL,
+    Surname VARCHAR(255) NOT NULL,
+	ClassID INT REFERENCES Classes(ID) ON DELETE CASCADE ON UPDATE CASCADE NOT NULL  
+);
+
+CREATE TABLE Teachers
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    AccountID INT REFERENCES Accounts(ID) ON DELETE CASCADE ON UPDATE CASCADE UNIQUE NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    SecondName VARCHAR(255) NOT  NULL,
+    Surname VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE Leadership
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    AccountID INT REFERENCES Accounts(ID) ON DELETE CASCADE ON UPDATE CASCADE UNIQUE NOT NULL,
+    FirstName VARCHAR(255) NOT NULL,
+    SecondName VARCHAR(255) NOT NULL,
+    Surname VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE Subjects
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    SubjectTitle VARCHAR(255) COLLATE Cyrillic_General_CI_AS NOT NULL UNIQUE
+);
+
+CREATE TABLE Homeworks
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    Description VARCHAR(600),
+	Date DATE NOT NULL,
+    SubjectID INT REFERENCES Subjects(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	TeacherID INT REFERENCES Teachers(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	ClassID INT REFERENCES Classes(ID) ON DELETE SET NULL ON UPDATE CASCADE
+);
+
+CREATE TABLE Grades
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    GradeValue TINYINT NOT NULL CHECK(GradeValue BETWEEN 2 AND 5),
+	SubjectID INT REFERENCES Subjects(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	TeacherID INT REFERENCES Teachers(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	StudentID INT REFERENCES Students(ID) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	Date DATE NOT NULL
+);
+
+CREATE TABLE Schedules
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+	DayOfWeek NVARCHAR(255) NOT NULL,
+	Time TIME NOT NULL,
+	SubjectID INT REFERENCES Subjects(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+	TeacherID INT REFERENCES Teachers(ID) ON DELETE SET NULL ON UPDATE CASCADE,
+	ClassID INT REFERENCES Students(ID) ON DELETE NO ACTION ON UPDATE NO ACTION,
+	CONSTRAINT UQ_Schedules_DayTime UNIQUE (DayOfWeek, Time, TeacherID),
+);
+
+CREATE TABLE Teachers_Subjects
+(
+    ID INT PRIMARY KEY IDENTITY(1,1) NOT NULL,
+    TeacherID INT REFERENCES Teachers(ID) ON DELETE CASCADE ON UPDATE CASCADE,
+    SubjectID INT REFERENCES Subjects(ID) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE News
+(
+	ID INT PRIMARY KEY IDENTITY(1,1),
+	TeacherID INT FOREIGN KEY REFERENCES Teachers(ID) NOT NULL,
+	ClassID INT FOREIGN KEY REFERENCES Classes(ID) NOT NULL,
+	Description NVARCHAR(255) NOT NULL
+);
+
+SELECT * FROM Students;
+SELECT * FROM Accounts;
+
+INSERT INTO Roles
+VALUES
+(N'Ученик'),
+(N'Учитель'),
+(N'Руководство');
+
+INSERT INTO Subjects
+VALUES
+('Математика'),
+('Русский язык'),
+('Литература'),
+('История'),
+('География'),
+('Биология'),
+('Химия'),
+('Физика'),
+('Информатика'),
+('Иностранный язык'),
+('Физкультура'),
+('Музыка'),
+('Изобразительное искусство'),
+('Трудовое обучение'),
+('Обществознание'),
+('ОБЖ');
+
+
+INSERT INTO Classes
+VALUES
+(1,'А'),
+(1,'Б'),
+(2,'А'),
+(2,'Б'),
+(3,'А'),
+(3,'Б'),
+(4,'А'),
+(4,'Б'),
+(5,'А'),
+(5,'Б'),
+(6,'А'),
+(6,'Б'),
+(7,'А'),
+(7,'Б'),
+(8,'А'),
+(8,'Б'),
+(9,'А'),
+(9,'Б'),
+(10,'А'),
+(10,'Б'),
+(11,'А'),
+(11,'Б');
+
+SELECT * FROM Grades;
+
+SELECT * FROM Teachers;
+
+SELECT * FROM Classes;

@@ -1,0 +1,27 @@
+﻿<Page x:Class="приложение.Views.Pages.NewsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Title="Новости" Height="400" Width="600">
+    <Grid>
+        <ItemsControl x:Name="NotificationsList" 
+                      ItemsSource="{Binding NewsList}" 
+                      HorizontalAlignment="Left" 
+                      VerticalAlignment="Top">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border Background="LightBlue" BorderBrush="Black" BorderThickness="2" Width="150" Height="120">
+                        <StackPanel>
+                            <TextBlock Text="{Binding Description}" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel ItemWidth="150" ItemHeight="120"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl>
+        <Button Width="200" Height="20" VerticalAlignment="Bottom" Content="Прочитать всё" Command="{Binding MarkAsReadCommand}"/>
+    </Grid>
+</Page>

@@ -1,0 +1,503 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище SchoolModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Accounts">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Login" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Password" Type="varbinary" MaxLength="1" Nullable="false" />
+    <Property Name="RoleID" Type="int" />
+  </EntityType>
+  <EntityType Name="Classes">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassNumber" Type="tinyint" Nullable="false" />
+    <Property Name="ClassLetter" Type="varchar" MaxLength="1" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+  </EntityType>
+  <EntityType Name="DaysOfTheWeek">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DayTitle" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ScheduleID" Type="int" />
+  </EntityType>
+  <EntityType Name="DaysOfTheWeek_Homeworks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DayOfTheWeekID" Type="int" />
+    <Property Name="HomeworkID" Type="int" />
+  </EntityType>
+  <EntityType Name="Grades">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GradeValue" Type="tinyint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Homeworks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="600" />
+    <Property Name="SubjectID" Type="int" />
+  </EntityType>
+  <EntityType Name="Leadership">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountID" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SecondName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Post" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleTitle" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Schedules">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountID" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SecondName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Students_Grades">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StudentID" Type="int" />
+    <Property Name="GradeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Subjects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectTitle" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Subjects_Grades">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubjectID" Type="int" />
+    <Property Name="GradeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Teachers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccountID" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="SecondName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="Surname" Type="varchar" MaxLength="255" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teachers_Grades">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="GradeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Teachers_Homeworks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="HomeworkID" Type="int" />
+  </EntityType>
+  <EntityType Name="Teachers_Subjects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TeacherID" Type="int" />
+    <Property Name="SubjectID" Type="int" />
+  </EntityType>
+  <Association Name="FK__Accounts__RoleID__4D94879B">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="0..1" />
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Accounts">
+        <PropertyRef Name="RoleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Classes__Student__5535A963">
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Classes" Type="Self.Classes" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Classes">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DaysOfThe__DayOf__02084FDA">
+    <End Role="DaysOfTheWeek" Type="Self.DaysOfTheWeek" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DaysOfTheWeek_Homeworks" Type="Self.DaysOfTheWeek_Homeworks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DaysOfTheWeek">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DaysOfTheWeek_Homeworks">
+        <PropertyRef Name="DayOfTheWeekID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DaysOfThe__Homew__02FC7413">
+    <End Role="Homeworks" Type="Self.Homeworks" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DaysOfTheWeek_Homeworks" Type="Self.DaysOfTheWeek_Homeworks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homeworks">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DaysOfTheWeek_Homeworks">
+        <PropertyRef Name="HomeworkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__DaysOfThe__Sched__6C190EBB">
+    <End Role="Schedules" Type="Self.Schedules" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="DaysOfTheWeek" Type="Self.DaysOfTheWeek" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Schedules">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="DaysOfTheWeek">
+        <PropertyRef Name="ScheduleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Homeworks__Subje__6383C8BA">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Homeworks" Type="Self.Homeworks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Homeworks">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Leadershi__Accou__5CD6CB2B">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Leadership" Type="Self.Leadership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Leadership">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Students___Grade__6FE99F9F">
+    <End Role="Grades" Type="Self.Grades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Students_Grades" Type="Self.Students_Grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grades">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Students_Grades">
+        <PropertyRef Name="GradeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Students___Stude__6EF57B66">
+    <End Role="Students" Type="Self.Students" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Students_Grades" Type="Self.Students_Grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Students_Grades">
+        <PropertyRef Name="StudentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Students__Accoun__5165187F">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Students" Type="Self.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subjects___Grade__778AC167">
+    <End Role="Grades" Type="Self.Grades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Subjects_Grades" Type="Self.Subjects_Grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grades">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Subjects_Grades">
+        <PropertyRef Name="GradeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Subjects___Subje__76969D2E">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Subjects_Grades" Type="Self.Subjects_Grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Subjects_Grades">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers___Grade__73BA3083">
+    <End Role="Grades" Type="Self.Grades" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers_Grades" Type="Self.Teachers_Grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Grades">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers_Grades">
+        <PropertyRef Name="GradeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers___Homew__7B5B524B">
+    <End Role="Homeworks" Type="Self.Homeworks" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers_Homeworks" Type="Self.Teachers_Homeworks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Homeworks">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers_Homeworks">
+        <PropertyRef Name="HomeworkID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers___Subje__7F2BE32F">
+    <End Role="Subjects" Type="Self.Subjects" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers_Subjects" Type="Self.Teachers_Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Subjects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers_Subjects">
+        <PropertyRef Name="SubjectID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers___Teach__72C60C4A">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers_Grades" Type="Self.Teachers_Grades" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers_Grades">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers___Teach__7A672E12">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers_Homeworks" Type="Self.Teachers_Homeworks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers_Homeworks">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers___Teach__7E37BEF6">
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers_Subjects" Type="Self.Teachers_Subjects" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teachers">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers_Subjects">
+        <PropertyRef Name="TeacherID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Teachers__Accoun__59063A47">
+    <End Role="Accounts" Type="Self.Accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Teachers" Type="Self.Teachers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Accounts">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Teachers">
+        <PropertyRef Name="AccountID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище SchoolModelContainer">
+    <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Classes" EntityType="Self.Classes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DaysOfTheWeek" EntityType="Self.DaysOfTheWeek" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DaysOfTheWeek_Homeworks" EntityType="Self.DaysOfTheWeek_Homeworks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Grades" EntityType="Self.Grades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Homeworks" EntityType="Self.Homeworks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Leadership" EntityType="Self.Leadership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Schedules" EntityType="Self.Schedules" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students" EntityType="Self.Students" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Students_Grades" EntityType="Self.Students_Grades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects" EntityType="Self.Subjects" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Subjects_Grades" EntityType="Self.Subjects_Grades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers" EntityType="Self.Teachers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers_Grades" EntityType="Self.Teachers_Grades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers_Homeworks" EntityType="Self.Teachers_Homeworks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teachers_Subjects" EntityType="Self.Teachers_Subjects" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Accounts__RoleID__4D94879B" Association="Self.FK__Accounts__RoleID__4D94879B">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Accounts" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Classes__Student__5535A963" Association="Self.FK__Classes__Student__5535A963">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Classes" EntitySet="Classes" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DaysOfThe__DayOf__02084FDA" Association="Self.FK__DaysOfThe__DayOf__02084FDA">
+      <End Role="DaysOfTheWeek" EntitySet="DaysOfTheWeek" />
+      <End Role="DaysOfTheWeek_Homeworks" EntitySet="DaysOfTheWeek_Homeworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DaysOfThe__Homew__02FC7413" Association="Self.FK__DaysOfThe__Homew__02FC7413">
+      <End Role="Homeworks" EntitySet="Homeworks" />
+      <End Role="DaysOfTheWeek_Homeworks" EntitySet="DaysOfTheWeek_Homeworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__DaysOfThe__Sched__6C190EBB" Association="Self.FK__DaysOfThe__Sched__6C190EBB">
+      <End Role="Schedules" EntitySet="Schedules" />
+      <End Role="DaysOfTheWeek" EntitySet="DaysOfTheWeek" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Homeworks__Subje__6383C8BA" Association="Self.FK__Homeworks__Subje__6383C8BA">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Homeworks" EntitySet="Homeworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Leadershi__Accou__5CD6CB2B" Association="Self.FK__Leadershi__Accou__5CD6CB2B">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Leadership" EntitySet="Leadership" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Students___Grade__6FE99F9F" Association="Self.FK__Students___Grade__6FE99F9F">
+      <End Role="Grades" EntitySet="Grades" />
+      <End Role="Students_Grades" EntitySet="Students_Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Students___Stude__6EF57B66" Association="Self.FK__Students___Stude__6EF57B66">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Students_Grades" EntitySet="Students_Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Students__Accoun__5165187F" Association="Self.FK__Students__Accoun__5165187F">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subjects___Grade__778AC167" Association="Self.FK__Subjects___Grade__778AC167">
+      <End Role="Grades" EntitySet="Grades" />
+      <End Role="Subjects_Grades" EntitySet="Subjects_Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Subjects___Subje__76969D2E" Association="Self.FK__Subjects___Subje__76969D2E">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Subjects_Grades" EntitySet="Subjects_Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers___Grade__73BA3083" Association="Self.FK__Teachers___Grade__73BA3083">
+      <End Role="Grades" EntitySet="Grades" />
+      <End Role="Teachers_Grades" EntitySet="Teachers_Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers___Homew__7B5B524B" Association="Self.FK__Teachers___Homew__7B5B524B">
+      <End Role="Homeworks" EntitySet="Homeworks" />
+      <End Role="Teachers_Homeworks" EntitySet="Teachers_Homeworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers___Subje__7F2BE32F" Association="Self.FK__Teachers___Subje__7F2BE32F">
+      <End Role="Subjects" EntitySet="Subjects" />
+      <End Role="Teachers_Subjects" EntitySet="Teachers_Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers___Teach__72C60C4A" Association="Self.FK__Teachers___Teach__72C60C4A">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Teachers_Grades" EntitySet="Teachers_Grades" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers___Teach__7A672E12" Association="Self.FK__Teachers___Teach__7A672E12">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Teachers_Homeworks" EntitySet="Teachers_Homeworks" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers___Teach__7E37BEF6" Association="Self.FK__Teachers___Teach__7E37BEF6">
+      <End Role="Teachers" EntitySet="Teachers" />
+      <End Role="Teachers_Subjects" EntitySet="Teachers_Subjects" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Teachers__Accoun__59063A47" Association="Self.FK__Teachers__Accoun__59063A47">
+      <End Role="Accounts" EntitySet="Accounts" />
+      <End Role="Teachers" EntitySet="Teachers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
